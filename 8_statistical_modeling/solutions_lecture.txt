@@ -1,0 +1,20 @@
+SOLUTIONS
+###########################################################################
+fit_tips = smf.ols("tip ~ total_bill", tips).fit()
+fit_tips.summary()
+
+
+####################################ASSUMPTIONS#############################
+tips["resid"] = fit_tips.resid
+(
+    ggplot(tips, aes("total_bill", y="resid"))
+    + geom_point()
+    + geom_hline(aes(yintercept=0), linetype="--", color="gray")
+)
+
+AND 
+
+sm.qqplot(fit_tips.resid, line="45", scale=np.std(fit.resid));
+
+
+it was not -> as the total bill increases, the variance increases.
